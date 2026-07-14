@@ -411,12 +411,26 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
   function submit(){
     next.textContent = 'Submitting…';
     next.disabled = true;
-    // Meta Pixel: fire Lead before the native POST navigates away.
+    // Meta Pixel: fire Lead on submit.
     if (window.fbq) fbq('track', 'Lead');
-    // Netlify Forms: native multipart POST so the file upload is included.
-    form.submit();
-    // If hosted somewhere without form handling, still show the thank-you.
-    setTimeout(function(){ show(LAST); }, 600);
+
+    // Qualification routing — ONLY applicants with English level 10 AND under 40
+    // are qualified and go straight to booking a call. Everyone else sees the
+    // in-page thank-you ("we'll be in contact soon").
+    var eng = parseInt((document.getElementById('eng') || {}).value, 10);
+    var age = parseInt((document.getElementById('age') || {}).value, 10);
+    var qualified = (eng === 10) && (age < 40);
+
+    function route(){
+      if (qualified) { window.location.href = 'https://apex-setter-landing.netlify.app'; }
+      else { show(LAST); }
+    }
+
+    // Submit to Netlify Forms via AJAX (multipart keeps the resume upload) so we
+    // control the redirect. Route on success OR on error — never trap the applicant.
+    fetch('/', { method: 'POST', body: new FormData(form) })
+      .then(route)
+      .catch(route);
   }
 
   // Clear a field's red highlight the moment it's corrected
