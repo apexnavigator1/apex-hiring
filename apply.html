@@ -440,7 +440,8 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
     var qualified = (eng === 10) && (age < 40);
 
     function route(){
-      // ?q=1 marks a qualified applicant so the booking page can fire Schedule
+      // ?q=1 marks this arrival as a qualified applicant (attribution only).
+      // Schedule is NOT fired here — it fires on thank-you.html after a real booking.
       if (qualified) { window.location.href = 'https://apex-setter-landing.netlify.app/?q=1'; }
       else { show(LAST); }
     }
