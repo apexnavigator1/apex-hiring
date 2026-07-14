@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b0b0b" />
+<meta name="color-scheme" content="dark" />
+<title>Apex Navigator — Now Hiring: Remote Appointment Setter</title>
+<meta name="description" content="Remote Appointment Setter at Apex Navigator. Warm inbound leads, proven script, full training. $1,000–$1,250/mo base plus weekly appointment bonuses." />
+<meta property="og:title" content="Now Hiring — Remote Appointment Setter | Apex Navigator" />
+<meta property="og:description" content="Warm inbound leads. Proven script. No experience required. $1,000–$1,250/mo base plus weekly bonuses." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0b; --ink-raise:#141312; --ink-card:#1a1917;
+    --amber:#ff9900; --live:#35d07a; --bad:#ef5b5b;
+    --bone:#ede8e0; --mute:#8a857c;
+    --line:rgba(237,232,224,.10); --line-strong:rgba(237,232,224,.20);
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{color-scheme:dark;background-color:var(--ink)}
+  body{
+    background-color:var(--ink); color:var(--bone);
+    font-family:var(--body); line-height:1.6; min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; background:var(--ink);
+    z-index:-1; pointer-events:none;
+  }
+  .wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 28px}
+  @media(max-width:640px){.wrap{padding:0 20px}}
+
+  /* header */
+  .bar{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,11,11,.88);backdrop-filter:blur(10px);z-index:20}
+  .barInner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px}
+  .mark{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:-.01em}
+  .markThin{font-weight:400;color:var(--mute)}
+  .hiring{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--live)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(53,208,122,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(53,208,122,.5)}70%{box-shadow:0 0 0 9px rgba(53,208,122,0)}100%{box-shadow:0 0 0 0 rgba(53,208,122,0)}}
+  .navApply{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--amber);padding:9px 16px;border-radius:8px;text-decoration:none;font-weight:500;white-space:nowrap}
+  .navApply:hover{filter:brightness(1.08)}
+  @media(max-width:720px){.hiring{display:none}}
+
+  /* sections */
+  .sec{padding:64px 0;border-bottom:1px solid var(--line)}
+  .sec:last-of-type{border-bottom:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
+  .secHead{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+  .secTitle{font-family:var(--disp);font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
+  .prose{font-size:17px;color:#cfc9c0;max-width:66ch}
+  .prose + .prose{margin-top:14px}
+  .hl{color:var(--amber);font-weight:600}
+
+  /* hero */
+  .hero{padding-top:70px;padding-bottom:52px}
+  .headline{font-family:var(--disp);font-size:clamp(38px,6.2vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1.02;margin-bottom:22px}
+  .amber{color:var(--amber)}
+  .heroSub{font-size:19px;color:#cfc9c0;max-width:56ch;margin-bottom:30px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+  .chip{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line-strong);background:var(--ink-raise);border-radius:999px;padding:9px 15px;font-size:14px}
+  .chip b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:400}
+  .heroCtas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--disp);font-weight:500;font-size:16px;padding:15px 26px;border-radius:11px;text-decoration:none;border:1px solid transparent;cursor:pointer}
+  .btnA{background:var(--amber);color:#140d00}
+  .btnA:hover{filter:brightness(1.08)}
+  .btnB{background:transparent;color:var(--bone);border-color:var(--line-strong)}
+  .btnB:hover{border-color:var(--bone)}
+  .payFlash{font-family:var(--mono);font-size:13px;color:var(--mute);margin-top:16px}
+  .payFlash b{color:var(--live);font-weight:500}
+
+  /* lists */
+  .list{list-style:none;display:grid;gap:12px;margin-top:22px;max-width:78ch}
+  .list li{display:flex;gap:14px;align-items:flex-start;background:var(--ink-raise);border:1px solid var(--line);border-radius:11px;padding:15px 17px}
+  .list .num{flex:none;width:26px;height:26px;border-radius:7px;background:rgba(255,153,0,.12);color:var(--amber);font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .list.good .num{background:rgba(53,208,122,.12);color:var(--live)}
+  .list li span{font-size:16px;color:#ded8cf}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+
+  /* pay */
+  .payGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+  @media(max-width:820px){.payGrid{grid-template-columns:1fr}}
+  .payCard{background:var(--ink-card);border:1px solid var(--line);border-radius:14px;padding:26px}
+  .payCard .cap{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:12px}
+  .payBig{font-family:var(--disp);font-size:40px;font-weight:700;letter-spacing:-.03em;color:var(--live);line-height:1.1}
+  .payBig small{font-size:17px;color:var(--mute);font-weight:400;letter-spacing:0}
+  .payNote{font-size:15px;color:#cfc9c0;margin-top:12px}
+  .bonusRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .bonusRow:last-child{border-bottom:none;padding-bottom:0}
+  .bonusRow span{font-size:15px;color:#ded8cf}
+  .bonusRow b{font-family:var(--mono);font-size:16px;color:var(--live);font-weight:500;white-space:nowrap}
+  .payFine{font-family:var(--mono);font-size:13px;color:var(--mute);margin-top:20px;line-height:1.7}
+
+  /* form */
+  .formSec{background:var(--ink-raise);border-top:1px solid var(--line)}
+  .formCard{background:var(--ink-card);border:1px solid var(--line-strong);border-radius:16px;padding:32px;margin-top:26px;max-width:760px}
+  @media(max-width:640px){.formCard{padding:22px}}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:640px){.fgrid{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .field.full{grid-column:1/-1}
+  label{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+  label .req{color:var(--amber)}
+  input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{
+    width:100%;background:var(--ink);color:var(--bone);border:1px solid var(--line-strong);
+    border-radius:10px;padding:14px 15px;font-family:var(--body);font-size:16px;
+    appearance:none;-webkit-appearance:none;
+  }
+  select{
+    background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238a857c' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 15px center;background-size:12px;padding-right:40px;cursor:pointer;
+  }
+  textarea{resize:vertical;min-height:110px;line-height:1.6}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber)}
+  input[type=file]{
+    width:100%;background:var(--ink);color:var(--mute);border:1px dashed var(--line-strong);
+    border-radius:10px;padding:14px 15px;font-family:var(--mono);font-size:13px;cursor:pointer;
+  }
+  input[type=file]::file-selector-button{
+    background:var(--ink-card);color:var(--bone);border:1px solid var(--line-strong);
+    border-radius:7px;padding:8px 13px;margin-right:13px;font-family:var(--mono);font-size:12px;cursor:pointer;
+  }
+  .hint{font-size:13px;color:var(--mute)}
+  .submit{width:100%;background:var(--amber);color:#140d00;border:none;border-radius:11px;padding:17px;font-family:var(--disp);font-weight:600;font-size:17px;cursor:pointer;margin-top:6px}
+  .submit:hover{filter:brightness(1.08)}
+  .formFine{font-family:var(--mono);font-size:12px;color:var(--mute);text-align:center;margin-top:14px;line-height:1.7}
+  .hp{position:absolute;left:-9999px;opacity:0}
+
+  /* closer + footer */
+  .closer{text-align:center;padding:64px 0}
+  .closer h2{font-family:var(--disp);font-size:clamp(26px,3.4vw,34px);font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+  .closer p{color:var(--mute);font-size:17px}
+  .foot{padding:34px 0 64px}
+  .foot .wrap{color:var(--mute);font-family:var(--mono);font-size:13px;letter-spacing:.03em;line-height:1.8}
+  .foot b{color:var(--bone)}
+
+  .applyBox{margin-top:28px;background:var(--ink-card);border:1px solid var(--line-strong);border-radius:16px;padding:34px;max-width:620px;text-align:center}
+  .applyKick{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:20px}
+  .btn.big{font-size:17px;padding:17px 32px;width:100%}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap barInner">
+    <span class="mark"><span class="markThin">APEX</span>NAVIGATOR</span>
+    <span class="hiring"><i class="dot"></i> now hiring</span>
+    <a href="apply.html" class="navApply">Apply</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="sec hero">
+  <div class="wrap">
+    <p class="eyebrow">Now hiring · Remote · Full-time</p>
+    <h1 class="headline">Remote<br><span class="amber">Appointment Setter.</span></h1>
+    <p class="heroSub">Be the first voice our future students hear. Warm inbound leads, a proven script, and full training — you bring the energy and the work ethic.</p>
+    <div class="chips">
+      <span class="chip"><b>Company</b> Apex Navigator</span>
+      <span class="chip"><b>Location</b> Remote</span>
+      <span class="chip"><b>Type</b> Full-Time</span>
+      <span class="chip"><b>Hours</b> EST (New York)</span>
+    </div>
+    <div class="heroCtas">
+      <a href="apply.html" class="btn btnA">Apply now →</a>
+      <a href="#pay" class="btn btnB">See the pay structure</a>
+    </div>
+    <p class="payFlash"><b>$1,000–$1,250/mo base</b> · paid weekly · plus weekly appointment bonuses</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec">
+  <div class="wrap">
+    <p class="secHead">About us</p>
+    <h2 class="secTitle">Who you'd be working with</h2>
+    <p class="prose">Apex Navigator is a <span class="hl">fast scaling business in the Amazon FBA space</span>, offering training to people on how to sell on Amazon to a United States audience, designed to guide entrepreneurs on their journey to Amazon success.</p>
+    <p class="prose">We're passionate about empowering our students and supporting their growth, and we're looking for a motivated and proficient English speaking Appointment Setter to join our team and play a key role in driving our sales process forward.</p>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="sec">
+  <div class="wrap">
+    <p class="secHead">Job overview</p>
+    <h2 class="secTitle">The role</h2>
+    <p class="prose">As an Appointment Setter, you will be the <span class="hl">first point of contact</span> for our potential clients, responsible for scheduling appointments with prospective customers interested in our Amazon FBA training.</p>
+    <p class="prose">You'll work closely with our sales and marketing teams to qualify leads, nurture interest, and help optimize our funnel by driving webinar attendance and appointment bookings. This is a remote role ideal for someone with excellent English communication skills, a proactive mindset, and a willingness to <span class="hl">learn, improve and apply high-end sales skills</span>.</p>
+  </div>
+</section>
+
+<!-- RESPONSIBILITIES -->
+<section class="sec">
+  <div class="wrap">
+    <p class="secHead">Key responsibilities</p>
+    <h2 class="secTitle">What you'll do</h2>
+    <ul class="list">
+      <li><i class="num">1</i><span>Utilize a proven script to reach out to potential leads via phone and text to qualify them, and proceed to schedule appointments on a calendar for sales consultations.</span></li>
+      <li><i class="num">2</i><span>Daily team meeting and sales training attendance.</span></li>
+      <li><i class="num">3</i><span>Follow up with leads in a timely and consistent manner using our CRM to increase show-up rates and engagement.</span></li>
+      <li><i class="num">4</i><span>Work closely with the sales and marketing teams to refine outreach strategies and optimize appointment-setting techniques.</span></li>
+      <li><i class="num">5</i><span>Keep accurate records of all interactions, scheduling, and follow-ups in our CRM system.</span></li>
+      <li><i class="num">6</i><span>Meet or exceed weekly and monthly targets for appointment bookings and show-up rates.</span></li>
+      <li><i class="num">7</i><span>Handle inbound and outbound calls, emails, and texts with professionalism and enthusiasm.</span></li>
+      <li><i class="num">8</i><span>Continuously learn about our products and customer needs to improve customer interactions.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section class="sec">
+  <div class="wrap">
+    <p class="secHead">Requirements</p>
+    <h2 class="secTitle">What you need to bring</h2>
+    <ul class="list">
+      <li><i class="num">1</i><span>Excellent verbal and written English communication skills, with a positive attitude and persuasive approach.</span></li>
+      <li><i class="num">2</i><span>Strong organizational skills, with the ability to manage multiple tasks and deadlines.</span></li>
+      <li><i class="num">3</i><span>Proficiency in learning and using CRM software and scheduling tools.</span></li>
+      <li><i class="num">4</i><span>Self-motivated, goal-oriented, and able to work independently in a remote environment.</span></li>
+      <li><i class="num">5</i><span>Availability to work EST (New York) hours.</span></li>
+      <li><i class="num">6</i><span>Ideally, previous experience calling and/or speaking to English-only speakers.</span></li>
+      <li><i class="num">7</i><span>300 dials per day.</span></li>
+      <li><i class="num">8</i><span>8 hours per day of work.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="sec">
+  <div class="wrap">
+    <p class="secHead">The benefits</p>
+    <h2 class="secTitle">Why join Apex Navigator</h2>
+    <ul class="list good">
+      <li><i class="num">✓</i><span>You will be given a phone script of exactly what to say in your interactions.</span></li>
+      <li><i class="num">✓</i><span>No experience required.</span></li>
+      <li><i class="num">✓</i><span>Access to warm inbound leads — <b>not</b> calling random people.</span></li>
+      <li><i class="num">✓</i><span>Supportive and passionate team dedicated to helping you succeed.</span></li>
+      <li><i class="num">✓</i><span>Opportunity for professional growth and career advancement.</span></li>
+      <li><i class="num">✓</i><span>Remote, flexible work environment with competitive pay and performance-based bonuses.</span></li>
+      <li><i class="num">✓</i><span>Comprehensive training and resources provided to guarantee your success.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- PAY -->
+<section class="sec" id="pay">
+  <div class="wrap">
+    <p class="secHead">Pay structure</p>
+    <h2 class="secTitle">What you'll earn</h2>
+    <p class="prose">A real base, paid weekly — plus uncapped upside every single week you perform.</p>
+    <div class="payGrid">
+      <div class="payCard">
+        <p class="cap">Base pay</p>
+        <p class="payBig">$1,000 <small>/ month</small></p>
+        <p class="payNote"><span class="hl">$1,250/mo</span> if working weekends.</p>
+        <p class="payNote">Paid in <b>$250 increments weekly</b>, every Monday — or <b>$312.50</b> weekly if working weekends.</p>
+      </div>
+      <div class="payCard">
+        <p class="cap">Weekly bonuses</p>
+        <div class="bonusRow"><span>16 qualified appointments / week</span><b>+$100</b></div>
+        <div class="bonusRow"><span>20 qualified appointments / week</span><b>+$150</b></div>
+        <div class="bonusRow"><span>25 qualified appointments / week</span><b>+$200</b></div>
+        <div class="bonusRow"><span>80% show-up rate</span><b>+$100</b></div>
+        <p class="payFine">Bonuses are paid on top of your base, every week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="sec formSec" id="apply">
+  <div class="wrap">
+    <p class="secHead">How to apply</p>
+    <h2 class="secTitle">Let's hear from you</h2>
+    <p class="prose">If you're excited about joining us in a remote appointment-setting role, we want to hear from you. The application takes about <span class="hl">3 minutes</span> — 10 short questions, plus an optional resume or cover letter upload.</p>
+    <div class="applyBox">
+      <p class="applyKick">10 questions · ~3 minutes · no experience required</p>
+      <a href="apply.html" class="btn btnA big">Start your application →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="sec closer">
+  <div class="wrap">
+    <h2>See you soon.</h2>
+    <p>— The Apex Navigator team</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>Apex Navigator</b> · Amazon FBA training &amp; store management.<br>Remote Appointment Setter · Full-Time · EST hours.
+  </div>
+</footer>
+
+</body>
+</html>
