@@ -96,6 +96,9 @@
   @media(max-width:640px){.hint{display:none}.next{flex:1}}
   .err{color:var(--bad);font-family:var(--mono);font-size:13px;margin-top:14px;display:none}
   .err.on{display:block}
+  .f.invalid input,.f.invalid select,.f.invalid textarea{border-color:var(--bad);background:rgba(239,91,91,.06)}
+  .f.invalid label{color:var(--bad)}
+  .choices.invalid{outline:1.5px solid var(--bad);outline-offset:6px;border-radius:14px}
 
   /* welcome + done */
   .center{text-align:center;max-width:620px;margin:0 auto}
@@ -333,17 +336,30 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
   function valid(n){
     var step = document.querySelector('.step[data-step="'+n+'"]');
     var err  = step.querySelector('.err');
-    var ok   = true;
+    var ok = true, emailBad = false, emptyBad = false, seen = {};
     step.querySelectorAll('input[data-req],textarea[data-req],select[data-req]').forEach(function(el){
+      var bad = false;
       if (el.type === 'radio'){
-        if (!step.querySelector('input[name="'+el.name+'"]:checked')) ok = false;
-      } else if (!el.value.trim()){
-        ok = false;
-      } else if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)){
-        ok = false;
+        if (seen[el.name]) return;
+        seen[el.name] = true;
+        bad = !step.querySelector('input[name="'+el.name+'"]:checked');
+        if (bad) emptyBad = true;
+        var grp = el.closest('.choices');
+        if (grp) grp.classList.toggle('invalid', bad);
+      } else {
+        if (!el.value.trim()){ bad = true; emptyBad = true; }
+        else if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)){ bad = true; emailBad = true; }
+        var wrap = el.closest('.f');
+        if (wrap) wrap.classList.toggle('invalid', bad);
       }
+      if (bad) ok = false;
     });
-    if (err) err.classList.toggle('on', !ok);
+    if (err){
+      err.textContent = (emailBad && !emptyBad)
+        ? 'That email address doesn’t look right — please check the field in red.'
+        : 'Please complete the fields highlighted in red.';
+      err.classList.toggle('on', !ok);
+    }
     return ok;
   }
 
@@ -365,6 +381,7 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
       input.checked = true;
       var err = c.closest('.step').querySelector('.err');
       if (err) err.classList.remove('on');
+      group.classList.remove('invalid');
       setTimeout(function(){ if (i < TOTAL) { show(i + 1); } }, 220);
     });
   });
@@ -401,6 +418,15 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
     // If hosted somewhere without form handling, still show the thank-you.
     setTimeout(function(){ show(LAST); }, 600);
   }
+
+  // Clear a field's red highlight the moment it's corrected
+  document.addEventListener('input', function(e){
+    var w = e.target.closest && e.target.closest('.f'); if (w) w.classList.remove('invalid');
+  });
+  document.addEventListener('change', function(e){
+    var w = e.target.closest && e.target.closest('.f'); if (w) w.classList.remove('invalid');
+    var g = e.target.closest && e.target.closest('.choices'); if (g) g.classList.remove('invalid');
+  });
 
   show(0);
 })();
