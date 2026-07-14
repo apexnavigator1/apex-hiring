@@ -46,8 +46,10 @@
   .markThin{font-weight:400;color:var(--mute)}
   .counter{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
-  .stage{max-width:900px;margin:0 auto;padding:56px 24px 120px;min-height:calc(100vh - 62px);display:flex;flex-direction:column;justify-content:center}
-  @media(max-width:640px){.stage{padding:36px 20px 130px}}
+  .stage{max-width:900px;margin:0 auto;padding:56px 24px 120px;min-height:calc(100vh - 62px);min-height:calc(100dvh - 62px);display:flex;flex-direction:column;justify-content:center}
+  /* mobile: tighter rhythm so even the tallest step clears the fixed nav without scrolling.
+     Bottom padding only needs to clear the nav (~97px) — more just makes the stage taller. */
+  @media(max-width:640px){.stage{padding:20px 20px calc(118px + env(safe-area-inset-bottom))}}
 
   .step{display:none;animation:in .4s cubic-bezier(.2,.7,.3,1)}
   .step.on{display:block}
@@ -62,7 +64,12 @@
   .scale b{color:var(--bone);font-weight:500}
   .fields{margin-top:30px;display:grid;gap:20px;max-width:620px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media(max-width:640px){.two{grid-template-columns:1fr}}
+  @media(max-width:640px){
+    .two{grid-template-columns:1fr;gap:14px}
+    .fields{margin-top:22px;gap:14px}
+    .choices,.drop{margin-top:22px}
+    .qnum{margin-bottom:12px}
+  }
   .f{display:flex;flex-direction:column;gap:8px}
   label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
   label .req{color:var(--signal)}
@@ -96,7 +103,7 @@
   .drop.has b{color:var(--live)}
 
   /* nav */
-  .nav{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(to top,var(--ink) 62%,rgba(13,14,17,0));padding:20px 24px 26px;z-index:30}
+  .nav{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(to top,var(--ink) 62%,rgba(13,14,17,0));padding:20px 24px calc(26px + env(safe-area-inset-bottom));z-index:30}
   .navIn{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:16px;padding:15px 30px;border-radius:3px;border:1px solid transparent;cursor:pointer}
   .next{background:var(--signal);color:#0D0E11}
@@ -172,11 +179,11 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
     <p class="qsub">Under <b>"Facebook / Instagram"</b>, add your profile if you have one.</p>
     <div class="fields">
       <div class="two">
-        <div class="f"><label for="fn">First name <span class="req">*</span></label><input id="fn" name="First name" type="text" data-req placeholder="Jane" /></div>
-        <div class="f"><label for="ln">Last name <span class="req">*</span></label><input id="ln" name="Last name" type="text" data-req placeholder="Smith" /></div>
+        <div class="f"><label for="fn">First name <span class="req">*</span></label><input id="fn" name="First name" type="text" autocomplete="given-name" autocapitalize="words" data-req placeholder="Jane" /></div>
+        <div class="f"><label for="ln">Last name <span class="req">*</span></label><input id="ln" name="Last name" type="text" autocomplete="family-name" autocapitalize="words" data-req placeholder="Smith" /></div>
       </div>
-      <div class="f"><label for="ph">Phone number (WhatsApp) <span class="req">*</span></label><input id="ph" name="Phone" type="tel" data-req placeholder="+57 321 123 4567" /></div>
-      <div class="f"><label for="em">Email <span class="req">*</span></label><input id="em" name="Email" type="email" data-req placeholder="name@example.com" /></div>
+      <div class="f"><label for="ph">Phone number (WhatsApp) <span class="req">*</span></label><input id="ph" name="Phone" type="tel" inputmode="tel" autocomplete="tel" data-req placeholder="+57 321 123 4567" /></div>
+      <div class="f"><label for="em">Email <span class="req">*</span></label><input id="em" name="Email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" data-req placeholder="name@example.com" /></div>
       <div class="f"><label for="soc">Facebook / Instagram</label><input id="soc" name="Facebook or Instagram" type="text" placeholder="@yourhandle (optional)" /></div>
     </div>
     <p class="err" id="e1">Please complete the required fields.</p>
@@ -187,7 +194,7 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
     <p class="qnum"><i>2</i> About you</p>
     <h2 class="q">How old are you?</h2>
     <div class="fields">
-      <div class="f"><label for="age">Age <span class="req">*</span></label><input id="age" name="Age" type="number" min="16" max="80" data-req placeholder="Type your answer here…" /></div>
+      <div class="f"><label for="age">Age <span class="req">*</span></label><input id="age" name="Age" type="number" inputmode="numeric" min="16" max="80" data-req placeholder="Type your answer here…" /></div>
     </div>
     <p class="err" id="e2">Please enter your age.</p>
   </section>
@@ -433,7 +440,8 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
     var qualified = (eng === 10) && (age < 40);
 
     function route(){
-      if (qualified) { window.location.href = 'https://apex-setter-landing.netlify.app'; }
+      // ?q=1 marks a qualified applicant so the booking page can fire Schedule
+      if (qualified) { window.location.href = 'https://apex-setter-landing.netlify.app/?q=1'; }
       else { show(LAST); }
     }
 
