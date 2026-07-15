@@ -390,8 +390,15 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
   back.addEventListener('click', function(){ if (i > 0) show(i - 1); });
 
   // choice cards
+  // NOTE: .choice is a <label> wrapping the radio. A label click is re-dispatched by
+  // the browser to that radio, which bubbles back up here — so this handler used to
+  // run TWICE per click and schedule TWO advances, silently skipping the next step
+  // (that's why "Hours available per day" and "Best contact method" were never asked).
+  // preventDefault() stops the re-dispatch; the `from` guard makes double-advance
+  // impossible even if a browser still fires twice.
   document.querySelectorAll('.choice').forEach(function(c){
-    c.addEventListener('click', function(){
+    c.addEventListener('click', function(e){
+      e.preventDefault();
       var input = c.querySelector('input');
       var group = c.closest('.choices');
       group.querySelectorAll('.choice').forEach(function(x){ x.classList.remove('sel'); });
@@ -400,7 +407,8 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
       var err = c.closest('.step').querySelector('.err');
       if (err) err.classList.remove('on');
       group.classList.remove('invalid');
-      setTimeout(function(){ if (i < TOTAL) { show(i + 1); } }, 220);
+      var from = i;
+      setTimeout(function(){ if (i === from && i < TOTAL) { show(i + 1); } }, 220);
     });
   });
 
@@ -439,17 +447,39 @@ src="https://www.facebook.com/tr?id=1773765086653843&ev=PageView&noscript=1"
     var age = parseInt((document.getElementById('age') || {}).value, 10);
     var qualified = (eng === 10) && (age < 40);
 
+    var appId = null;   // opaque id from our API — NOT personal data, safe for a URL
+
     function route(){
-      // ?q=1 marks this arrival as a qualified applicant (attribution only).
+      // ?q=1 marks this arrival as qualified. &a=<id> lets the booking page link the
+      // voice note to THIS application with no retyping (identity is looked up server-side).
       // Schedule is NOT fired here — it fires on thank-you.html after a real booking.
-      if (qualified) { window.location.href = 'https://apex-setter-landing.netlify.app/?q=1'; }
+      if (qualified) {
+        var u = 'https://apex-setter-landing.netlify.app/?q=1';
+        if (appId) u += '&a=' + encodeURIComponent(appId);
+        window.location.href = u;
+      }
       else { show(LAST); }
     }
 
-    // Submit to Netlify Forms via AJAX (multipart keeps the resume upload) so we
-    // control the redirect. Route on success OR on error — never trap the applicant.
-    fetch('/', { method: 'POST', body: new FormData(form) })
-      .then(route)
+    // Primary store: our own function (Netlify Blobs) — free, and keeps applications
+    // in the same store as the voice notes so they can be matched.
+    // Fallback: Netlify Forms, so a function outage can never lose a real application.
+    var API = 'https://apex-setter-landing.netlify.app/api/submit-application';
+
+    function fallbackToForms(why){
+      try { console.warn('application API failed (' + why + ') — falling back to Netlify Forms'); } catch(e){}
+      return fetch('/', { method: 'POST', body: new FormData(form) });
+    }
+
+    fetch(API, { method: 'POST', body: new FormData(form) })
+      .then(function(r){
+        if (r && r.ok) return r.json().catch(function(){ return null; });
+        return fallbackToForms('http ' + (r && r.status)).then(function(){ return null; });
+      })
+      .catch(function(){
+        return fallbackToForms('network').then(function(){ return null; }, function(){ return null; });
+      })
+      .then(function(j){ if (j && j.id) appId = j.id; route(); })
       .catch(route);
   }
 
